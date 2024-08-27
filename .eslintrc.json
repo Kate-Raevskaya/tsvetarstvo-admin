@@ -11,6 +11,11 @@
   "root": true,
   "ignorePatterns": ["dist"],
   "rules": {
+    "no-console": "warn",
+    "curly": "error",
+    "import/prefer-default-export": "off",
+    "react/jsx-no-useless-fragment": "error",
+    "no-unused-expressions": "warn",
     "@typescript-eslint/consistent-type-imports": [
       2,
       { "fixStyle": "separate-type-imports" }
