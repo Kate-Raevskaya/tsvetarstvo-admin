@@ -3,6 +3,7 @@ import { NavLink, Outlet } from "react-router-dom"
 import { Navbar } from "../../components/Navbar/Navbar"
 import { useGetAllCategoriesQuery } from "../../store/apiSlice"
 import type { Category } from "../../types/types"
+import "./Catalog.scss"
 
 type Props = {
   categories: Category[]
