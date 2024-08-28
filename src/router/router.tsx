@@ -1,7 +1,11 @@
 import { createBrowserRouter } from "react-router-dom"
 
 import App from "../App"
+import { AllProducts } from "../pages/all-products/AllProducts"
+import { Catalog } from "../pages/catalog/Catalog"
 import { Login } from "../pages/login/Login"
+import { Products } from "../pages/products/Products"
+import { Subcategories } from "../pages/subcategories/Subcategories"
 
 export const router = createBrowserRouter([
   {
@@ -14,20 +18,16 @@ export const router = createBrowserRouter([
       },
       {
         path: "catalog",
-        element: <p></p>,
+        element: <Catalog />,
         children: [
-          { index: true, element: <p></p> },
+          { index: true, element: <AllProducts /> },
           {
             path: "category/:id",
-            element: <p></p>,
-          },
-          {
-            path: "variants",
-            element: <p></p>,
+            element: <Products />,
           },
           {
             path: "subcategories/:id",
-            element: <p></p>,
+            element: <Subcategories />,
           },
         ],
       },
