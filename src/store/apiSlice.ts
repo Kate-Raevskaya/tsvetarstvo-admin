@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 import { transformProductApiV1Data } from "../helpers/data-transform"
-import type { Category, Product } from "../types/types"
+import type { Category, Product, Variant } from "../types/types"
 
 export const apiSlice = createApi({
   reducerPath: "api",
@@ -32,6 +32,16 @@ export const apiSlice = createApi({
       }),
       transformResponse: transformProductApiV1Data,
     }),
+    getAllVariationsForSingleProduct: builder.query<Variant[], number>({
+      query: id => ({
+        url: `products/${id}/variants`,
+      }),
+    }),
+    getProductById: builder.query<Product, number>({
+      query: id => ({
+        url: `products/${id}`,
+      }),
+    }),
   }),
 })
 
@@ -40,4 +50,6 @@ export const {
   useGetAllProductsQuery,
   useGetSubcategoriesQuery,
   useGetProductsFromCategoryQuery,
+  useGetAllVariationsForSingleProductQuery,
+  useGetProductByIdQuery,
 } = apiSlice
