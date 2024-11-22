@@ -3,7 +3,9 @@ import { createBrowserRouter } from "react-router-dom"
 import App from "../App"
 import { AllProducts } from "../pages/all-products/AllProducts"
 import { Catalog } from "../pages/catalog/Catalog"
+import { CreateProductPage } from "../pages/create-product/CreateProductPage"
 import { Login } from "../pages/login/Login"
+import { ProductPage } from "../pages/product/ProductPage"
 import { Products } from "../pages/products/Products"
 import { Subcategories } from "../pages/subcategories/Subcategories"
 
@@ -31,7 +33,8 @@ export const router = createBrowserRouter([
           },
         ],
       },
-      { path: "product/:id", element: <p></p> },
+      { path: "product/:id", element: <ProductPage /> },
+      { path: "editing", element: <CreateProductPage /> },
       { path: "editing/:id", element: <p></p> },
     ],
   },

@@ -2,7 +2,7 @@ import { useSearchParams } from "react-router-dom"
 
 import { ProductsContainer } from "../../components/ProductsContainer/ProductsContainer"
 import { useGetAllProductsQuery } from "../../store/apiSlice"
-import "./AllProducts.scss"
+import cls from "./AllProducts.module.scss"
 
 export const AllProducts = () => {
   let [searchParams, setSearchParams] = useSearchParams()
@@ -12,7 +12,7 @@ export const AllProducts = () => {
   let { data: products = [], isLoading } = useGetAllProductsQuery(featured)
 
   return (
-    <div className="all-products">
+    <div className={cls.allProducts}>
       <ProductsContainer products={products} />
     </div>
   )

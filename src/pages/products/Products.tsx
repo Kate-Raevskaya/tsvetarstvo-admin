@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom"
 
 import { ProductsContainer } from "../../components/ProductsContainer/ProductsContainer"
 import { useGetProductsFromCategoryQuery } from "../../store/apiSlice"
-import "./Products.scss"
+import cls from "./Products.module.scss"
 
 export const Products = () => {
   let { id = "" } = useParams()
@@ -12,9 +12,9 @@ export const Products = () => {
     useGetProductsFromCategoryQuery(categoryId)
 
   return (
-    <div className="category-product-container">
+    <div className={cls.categoryProductContainer}>
       {products.length === 0 ? (
-        <div className="product-not-found">
+        <div className={cls.productNotFound}>
           <p>Товаров из этой категории еще нет на сайте</p>
           <p>
             Нажите "Добавить новый товар" вверху страницы чтобы добавить товар в
