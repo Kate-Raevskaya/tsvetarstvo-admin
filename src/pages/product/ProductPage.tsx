@@ -1,10 +1,9 @@
-import { logDOM } from "@testing-library/dom"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 
 import { useGetProductByIdQuery } from "../../store/apiSlice"
 import type { Product, Variant } from "../../types/types"
-import "./ProductPage.scss"
+import cls from "./ProductPage.module.scss"
 
 type Props = {
   variant: Variant
@@ -35,7 +34,9 @@ export const ProductPage = () => {
     return <p>Что-то пошло не так...</p>
   }
 
-  function handleSaveProduct() {
+  function handleSaveProduct(e: React.FormEvent) {
+    e.preventDefault()
+    //todo отправка измененного продукта
     setIsEditing(!isEditing)
   }
 
@@ -44,21 +45,21 @@ export const ProductPage = () => {
   }
 
   return (
-    <div className="product-page-container">
+    <div className={cls.productPageContainer}>
       <button
-        className="go-back-button"
+        className={cls.goBackButton}
         onClick={() => {
           navigate(-1)
         }}
       >
         Назад
       </button>
-      <div className="products-container">
-        <div className="product-image">
+      <div className={cls.productsContainer}>
+        <div className={cls.productImage}>
           <img src={product.image} alt="product" />
         </div>
         {isEditing ? (
-          <form className="edit-product-form">
+          <form className={cls.editProductForm} onSubmit={handleSaveProduct}>
             <label>
               <p>Наименование</p>
               <input
@@ -78,7 +79,6 @@ export const ProductPage = () => {
                 type="checkbox"
                 checked={productDescription.featured}
                 onChange={e => {
-                  console.log("here")
                   setProductDescription({
                     ...productDescription,
                     featured: !productDescription.featured,
@@ -97,24 +97,20 @@ export const ProductPage = () => {
               <p>Дополнительная информация</p>
               <input type="text" />
             </label>
-            <button
-              className="save-product-button"
-              onClick={handleSaveProduct}
-              type="submit"
-            >
+            <button className={cls.saveProductButton} type="submit">
               Сохранить
             </button>
           </form>
         ) : (
           <>
-            <div className="product-desc">
+            <div className={cls.productDesc}>
               <p>{product.name}</p>
               <p>Актуально: {product.featured ? "да" : "нет"}</p>
               <p>Тип товара и описание</p>
               <p>доп.информация</p>
             </div>
             <button
-              className="eddit-product-button"
+              className={cls.edditProductButton}
               onClick={handleEditProduct}
             >
               Редактировать продукт
@@ -122,15 +118,15 @@ export const ProductPage = () => {
           </>
         )}
       </div>
-      <div className="variants-container">
+      <div className={cls.variantsContainer}>
         <p>Все размеры товара</p>
-        <div className="variants">
+        <div className={cls.variants}>
           {product.variants.map(variant => {
             return <ProductVariant key={variant.id} variant={variant} />
           })}
         </div>
       </div>
-      <button className="add-variant-button">Добавить размер</button>
+      <button className={cls.addVariantButton}>Добавить размер</button>
     </div>
   )
 }
@@ -147,14 +143,14 @@ const ProductVariant = ({ variant }: Props) => {
   let size = sizeAttribute.value.toUpperCase()
 
   return (
-    <div className="variant">
+    <div className={cls.variant}>
       <p>{size}</p>
-      <div className="variant-image">
+      <div className={cls.variantImage}>
         <img src={variant.image} alt="variant" />
       </div>
       <p>{variant.price}Р</p>
-      <button className="delete-button">Удалить</button>
-      <button className="edit-variant-button">Редактировать</button>
+      <button className={cls.deleteButton}>Удалить</button>
+      <button className={cls.editVariantButton}>Редактировать</button>
     </div>
   )
 }
