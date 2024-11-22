@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 
 import { useGetProductByIdQuery } from "../../store/apiSlice"
-import type { Product, Variant } from "../../types/types"
+import { type Product, type Variant } from "../../types/types"
 import cls from "./ProductPage.module.scss"
 
 type Props = {

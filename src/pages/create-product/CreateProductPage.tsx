@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 
 import { useGetProductByIdQuery } from "../../store/apiSlice"
-import { Product } from "../../types/types"
+import { type Product } from "../../types/types"
 import cls from "./CreateProductPage.module.scss"
 
 export const CreateProductPage = () => {
