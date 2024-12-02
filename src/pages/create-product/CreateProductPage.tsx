@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form"
 import { useParams } from "react-router-dom"
 
+import { AddImage } from "./AddImage/AddImage"
 import cls from "./CreateProductPage.module.scss"
 
 export const CreateProductPage = () => {
@@ -29,6 +30,7 @@ export const CreateProductPage = () => {
     handleSubmit,
     watch,
     formState: { errors },
+    setValue,
   } = useForm({
     defaultValues: product,
   })
@@ -39,6 +41,7 @@ export const CreateProductPage = () => {
         className={cls.form}
         onSubmit={handleSubmit(data => {
           alert(JSON.stringify(data))
+          console.log(data)
         })}
       >
         <label>
@@ -73,6 +76,7 @@ export const CreateProductPage = () => {
           </select>
         </label>
 
+        {/*todo сделано только для декора*/}
         {watch("category") === "decor" && (
           <label>
             Раздел
@@ -99,11 +103,7 @@ export const CreateProductPage = () => {
           <input {...register("price")} />
         </label>
 
-        <label>
-          {/*todo добавление фото*/}
-          Фото
-          <input {...register("imageUrl")} />
-        </label>
+        <AddImage register={register} setValue={setValue} />
 
         <div>
           <label>
