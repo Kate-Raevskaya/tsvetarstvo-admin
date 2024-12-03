@@ -1,80 +1,113 @@
-import { useEffect, useState } from "react"
+import { useForm } from "react-hook-form"
 import { useParams } from "react-router-dom"
 
-import { useGetProductByIdQuery } from "../../store/apiSlice"
-import { type Product } from "../../types/types"
+import { AddImage } from "./AddImage/AddImage"
 import cls from "./CreateProductPage.module.scss"
 
 export const CreateProductPage = () => {
   let { id = "" } = useParams()
   let productId = parseInt(id)
 
-  let { data: product, isLoading } = useGetProductByIdQuery(productId)
+  // let { data: product, isLoading } = useGetProductByIdQuery(productId)
+  //todo не подходит, нужен ендпоинт для полной информации о продукте
 
-  const [productDesc, setProductDesc] = useState<Product | undefined>(product)
+  const product = {
+    id: Math.random(), //todo переделать
+    name: "",
+    description: "",
+    type: "",
+    category: "",
+    size: "",
+    price: "",
+    imageUrl: "",
+    featured: false,
+    isMainImage: false,
+  }
 
-  useEffect(() => {
-    setProductDesc(product)
-  }, [product])
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+    setValue,
+  } = useForm({
+    defaultValues: product,
+  })
 
   return (
     <div className={cls.createPageContainer}>
-      <form>
+      <form
+        className={cls.form}
+        onSubmit={handleSubmit(data => {
+          alert(JSON.stringify(data))
+          console.log(data)
+        })}
+      >
         <label>
-          <p>Наименование</p>
-          {/*<input type='text' name='name' value={} onChange={} />*/}
+          Наименование
+          <input {...register("name", { required: true })} />
         </label>
+        {errors.name && <p>Это обязательное поле</p>}
+
         <label>
-          <p>Описание</p>
-          {/*<input type='text' name='description' value={} onChange={} />*/}
+          Описание
+          <input {...register("description")} />
         </label>
+
         <label>
-          <p>Тип товара</p>
-          <select name="type">
+          Тип товара
+          <select {...register("type")}>
             <option value="bouqet">Букет</option>
             <option value="composition">Композиция</option>
           </select>
         </label>
+
         <label>
-          <p>Категория</p>
-          {/*todo нужна ли подкатегория?*/}
-          <select name="category">
+          Категория
+          <select {...register("category")}>
             <option value="bouqet">Букет</option>
             <option value="composition">Композиция</option>
-            <option value="mono">Моно</option>
-            <option value="dried-flower">Сухоцветы</option>
+            <option value="mono-rose">Моно / Розы</option>
+            <option value="mono-no-rose">Моно / Не розы</option>
+            <option value="dried-flower-compositions">
+              Сухоцветы / Авторсике композиции
+            </option>
+            <option value="dried-flower-mono">
+              Сухоцветы / Моно сухоцветы
+            </option>
             <option value="bride">Невестам</option>
-            <option value="decor">Декор</option>
+            <option value="decor-wooden-products">Декор / Дерево</option>
+            <option value="decor-vases">Декор / Вазы</option>
+            <option value="decor-candles">Декор / Свечи</option>
           </select>
         </label>
+
         <label>
-          <p>Размер</p>
-          {/*<input type="text" name="name" value={} onChange={} />*/}
+          Размер
+          <select {...register("size")}>
+            <option value="s">S</option>
+            <option value="m">M</option>
+            <option value="l">L</option>
+          </select>
         </label>
+
         <label>
-          <p>Цена</p>
-          {/*<input type='text' name='price' value={} onChange={} />*/}
+          Цена
+          <input {...register("price")} />
         </label>
+
+        <AddImage register={register} setValue={setValue} />
+
         <label>
-          <p>Фото</p>
-          {/*todo*/}
+          Добавить в "актуальное"
+          <input type="checkbox" {...register("featured")} />
         </label>
-        <div>
-          <label>
-            <p>Актуальный товар</p>
-            <input
-              type="checkbox"
-              // checked={}
-            />
-          </label>
-          <label>
-            <p>Сделать обложкой</p>
-            <input
-              type="checkbox"
-              // checked={}
-            />
-          </label>
-        </div>
+
+        <label>
+          Сделать обложкой
+          <input type="checkbox" {...register("isMainImage")} />
+        </label>
+
         <button type="submit">Добавить</button>
       </form>
     </div>

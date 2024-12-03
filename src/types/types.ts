@@ -40,3 +40,16 @@ export type Attribute = {
   name: string
   value: string
 }
+
+export type FullProductData = {
+  id: number
+  name: string
+  description: string
+  type: string
+  category: string
+  size: string
+  price: string
+  imageUrl: string
+  featured: boolean
+  isMainImage: boolean
+}
