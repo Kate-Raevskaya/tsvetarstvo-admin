@@ -1,11 +1,12 @@
 import "cropperjs/dist/cropper.css"
-import React, { useCallback, useRef, useState } from "react"
-import { ReactCropperElement } from "react-cropper"
+import { useCallback, useRef, useState } from "react"
+import type React from "react"
+import { type ReactCropperElement } from "react-cropper"
 import ReactCropper from "react-cropper"
 import { useDropzone } from "react-dropzone"
-import { UseFormRegister, UseFormSetValue } from "react-hook-form"
+import { type UseFormRegister, type UseFormSetValue } from "react-hook-form"
 
-import { FullProductData } from "../../../types/types"
+import { type FullProductData } from "../../../types/types"
 import cls from "./AddImage.module.scss"
 
 type Props = {
