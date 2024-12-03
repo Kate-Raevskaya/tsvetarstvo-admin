@@ -47,7 +47,6 @@ export type FullProductData = {
   description: string
   type: string
   category: string
-  subcategory: string
   size: string
   price: string
   imageUrl: string

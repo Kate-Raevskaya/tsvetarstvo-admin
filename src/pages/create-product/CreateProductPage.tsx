@@ -17,7 +17,6 @@ export const CreateProductPage = () => {
     description: "",
     type: "",
     category: "",
-    subcategory: "",
     size: "",
     price: "",
     imageUrl: "",
@@ -63,39 +62,33 @@ export const CreateProductPage = () => {
           </select>
         </label>
 
-        {/*todo нужна ли подкатегория? или все в категории типо моно-розы, моно-не розы*/}
         <label>
           Категория
           <select {...register("category")}>
             <option value="bouqet">Букет</option>
             <option value="composition">Композиция</option>
-            <option value="mono">Моно</option>
-            <option value="dried-flower">Сухоцветы</option>
+            <option value="mono-rose">Моно / Розы</option>
+            <option value="mono-no-rose">Моно / Не розы</option>
+            <option value="dried-flower-compositions">
+              Сухоцветы / Авторсике композиции
+            </option>
+            <option value="dried-flower-mono">
+              Сухоцветы / Моно сухоцветы
+            </option>
             <option value="bride">Невестам</option>
-            <option value="decor">Декор</option>
+            <option value="decor-wooden-products">Декор / Дерево</option>
+            <option value="decor-vases">Декор / Вазы</option>
+            <option value="decor-candles">Декор / Свечи</option>
           </select>
         </label>
 
-        {/*todo сделано только для декора*/}
-        {watch("category") === "decor" && (
-          <label>
-            Раздел
-            <select {...register("subcategory")}>
-              <option value="1">Дерево</option>
-              <option value="2">Вазы</option>
-              <option value="3">Свечи</option>
-            </select>
-          </label>
-        )}
-
         <label>
           Размер
-          <input {...register("size")} />
-        </label>
-
-        <label>
-          Цена
-          <input {...register("price")} />
+          <select {...register("size")}>
+            <option value="s">S</option>
+            <option value="m">M</option>
+            <option value="l">L</option>
+          </select>
         </label>
 
         <label>
@@ -105,17 +98,15 @@ export const CreateProductPage = () => {
 
         <AddImage register={register} setValue={setValue} />
 
-        <div>
-          <label>
-            Актуальный товар
-            <input type="checkbox" {...register("featured")} />
-          </label>
+        <label>
+          Добавить в "актуальное"
+          <input type="checkbox" {...register("featured")} />
+        </label>
 
-          <label>
-            Сделать обложкой
-            <input type="checkbox" {...register("isMainImage")} />
-          </label>
-        </div>
+        <label>
+          Сделать обложкой
+          <input type="checkbox" {...register("isMainImage")} />
+        </label>
 
         <button type="submit">Добавить</button>
       </form>
